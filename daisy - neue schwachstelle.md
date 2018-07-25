@@ -55,4 +55,37 @@ Im Hinblick auf den "Shop-Kontext" von Daisy wurde entschieden, eine Upload-Mask
 
 Die Maske ist dabei nicht für alle User ersichtlich. Die Rolle des zweiten Users wurde von der einer Standardrolle auf die Rolle des sogenannten "Shop Owners" geändert. Der Spieler erhält Zugriff auf diesen zweiten User durch Ausnützen der Inscure Direct Object Reference aus der ursprünglichen Implementierung.
 
+Wird auf das Profil des nunmehr "Shop Keeper" genannten Users zugegriffen, so erhält der Nutzer einen "Hint", welcher das Passwort des neuen Nutzers im Klartext ausgibt.
+
+![alt text](https://imgur.com/5njw0KX.png "Anzeige des Passworts für den Shop Keeper")
+
+Wenn sich der User abmeldet und mit dem Shop Keeper - User neu anmeldet, weist das Menu nun einen neuen Eintrag aus:
+
+![alt text](https://imgur.com/HDKBFNg.png "Upload Sektion verfügbar")
+
+Nach Klick auf den neuen Menupünkt befindet sich der User in der Produktupload-Maske.
+
+![alt text](https://imgur.com/noklEqS.png "Upload Maske")
+
+Nun kann ein neues Produkt in Form eines sauberen XML-Files zum Produkte-Katalog hinzugefügt werden:
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<product>
+    <active>true</active>
+    <category>
+            <name>Smartphone</name>
+        <parent>
+            <name>Electro</name>
+        </parent>
+    </category>
+    <description>"An expensive brick"</description>
+    <imagePath>images/products/IphoneX.jpg</imagePath>
+    <name>Apple Iphone X</name>
+    <price>1199.99</price>
+</product>
+
+```
+
+
+
 
