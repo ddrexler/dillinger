@@ -93,6 +93,10 @@ Allerdings erhält der Nutzer auch eine Textrückgabe des erzeugten XML. Der fin
 
 ![alt text](https://imgur.com/yLtehXI.png "Ausgabe für den Nutzer")
 
+Ein Upload einer Nicht-XML Datei klappt übrigens nicht und führt zu einer Fehlermeldung:
+
+![alt text](https://imgur.com/61iBN8C.png "Upload nicht erfolgreich")
+
 So wäre es doch interessant, was passiert, wenn in dem eingespielten XML eine andere Datei referenziert wird, deren Inhalt dann zurückgegeben wird.
 
 Auch die Command Execution Schwachstelle aus der ursprünglichen Implementierung wurde leicht modifiziert.
