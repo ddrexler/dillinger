@@ -87,7 +87,11 @@ Nun kann ein neues Produkt in Form eines sauberen XML-Files zum Produkte-Katalog
 
 Wodurch das neu erzeugte Produkt dem Katalog erfolgreich hinzugefügt wird:
 
+![alt text](https://imgur.com/jFXdQNB.png "Das neu erzeugte Produkt")
+
 Allerdings erhält der Nutzer auch eine Textrückgabe des erzeugten XML. Der findige Spieler kann hier bereits vermuten, dass hier womöglich ungewollte Informationen abgesaugt werden können. 
+
+![alt text](https://imgur.com/yLtehXI.png "Ausgabe für den Nutzer")
 
 So wäre es doch interessant, was passiert, wenn in dem eingespielten XML eine andere Datei referenziert wird, deren Inhalt dann zurückgegeben wird.
 
@@ -125,7 +129,7 @@ Im Gegensatz zur Command Execution, die den Zugriff auf diese Datei nicht gestat
 </product>
 ```
 
-So erhält der Nutzer eine Rückgabe, welche den Token in der Textdatei ausgibt.
+So erhält der Nutzer eine Rückgabe, welche den gesamten Inthalt der Textdatei ausgibt.
 
 ![alt text](https://imgur.com/XBoU2QP.png "Das Token wird zurückgegeben")
 
