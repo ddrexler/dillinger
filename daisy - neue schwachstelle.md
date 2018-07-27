@@ -37,7 +37,7 @@ Allerdings, und hier entsteht nun die Gefahr, muss der String nicht direkt im Do
 
 Diese Art des Angriffs klappt nur dann, wenn der Angreifer nach dem Einspielen der XML Datei eine Rückgabe der geparsten Datei erhält. Ist dies nicht der Fall, so kann mittels einer "Blind"-Variante, wo eine Datei auf einem externen Server, den der Angreifer unter seiner eigenen Kontrolle hat, referenziert wird, zumindest festgestellt werden, ob der Angriff möglich ist.
 
-Die Variante mit Textrückgabe kommt in weiterer Folge in der neuen Daisy-Schwachstelle zum Einsatz um ein Reward-Token auszulesen. Dem Angreifer wird dabei auch die geparste XML-Datei angezeigt, welche nach erfolgreichem Angriff, das Token erhalten wird.
+Die Variante mit Textrückgabe kommt in weiterer Folge in der neuen Daisy-Schwachstelle zum Einsatz um ein Reward-Token auszulesen. Dem Angreifer wird dabei auch die geparste XML-Datei angezeigt, welche nach erfolgreichem Angriff, das Token beinhalten wird.
 
 ### Remote Code Execution
 
@@ -53,13 +53,13 @@ Um die Schwachstelle in Daisy einbetten zu können, war klar, dass eine Möglich
 
 Im Hinblick auf den "Shop-Kontext" von Daisy wurde entschieden, eine Upload-Maske für Produkte zu integrieren. Der Upload erfolgt dabei natürlich über XML, das neu zu erstellende Produkt soll in diesem Format beschrieben werden.
 
-Die Maske ist dabei nicht für alle User ersichtlich. Die Rolle des zweiten Users wurde von der einer Standardrolle auf die Rolle des sogenannten "Shop Owners" geändert. Der Spieler erhält Zugriff auf diesen zweiten User durch Ausnützen der Inscure Direct Object Reference aus der ursprünglichen Implementierung.
+Die Maske ist dabei nicht für alle User ersichtlich. Die Rolle des zweiten Users wurde von der einer Standardrolle auf die Rolle des sogenannten "Shopkeepers" geändert. Der Spieler erhält Zugriff auf diesen zweiten User durch Ausnützen der Inscure Direct Object Reference aus der ursprünglichen Implementierung.
 
-Wird auf das Profil des nunmehr "Shop Keeper" genannten Users zugegriffen, so erhält der Nutzer einen "Hint", welcher das Passwort des neuen Nutzers im Klartext ausgibt.
+Wird auf das Profil des nunmehr "Shopkeeper" genannten Users zugegriffen, so erhält der Nutzer einen "Hint", welcher das Passwort des neuen Nutzers im Klartext ausgibt.
 
 ![alt text](https://imgur.com/5njw0KX.png "Anzeige des Passworts für den Shop Keeper")
 
-Wenn sich der User abmeldet und mit dem Shop Keeper - User neu anmeldet, weist das Menu nun einen neuen Eintrag aus:
+Wenn sich der User abmeldet und mit dem Shopkeeper-User neu anmeldet, weist das Menu nun einen neuen Eintrag aus:
 
 ![alt text](https://imgur.com/HDKBFNg.png "Upload Sektion verfügbar")
 
@@ -97,9 +97,11 @@ Ein Upload einer Nicht-XML Datei klappt übrigens nicht und führt zu einer Fehl
 
 ![alt text](https://imgur.com/61iBN8C.png "Upload nicht erfolgreich")
 
-So wäre es doch interessant, was passiert, wenn in dem eingespielten XML eine andere Datei referenziert wird, deren Inhalt dann zurückgegeben wird.
+Nun könnte sich für den Nutzer die Frage stellen, was passiert, wenn in dem eingespielten XML eine andere Datei referenziert wird, deren Inhalt dann zurückgegeben wird.
 
-Auch die Command Execution Schwachstelle aus der ursprünglichen Implementierung wurde leicht modifiziert.
+Im Kontext des Spiels muss dem Nutzer allerdings auch ein Hinweis auf eine möglicherweise ausnützbare Datei geliefert werden.
+
+Um dies zu realisieren wurde auch die Command Execution Schwachstelle aus der ursprünglichen Implementierung leicht modifiziert:
 
 Beim Listing der Files im /tmp Verzeichnis taucht nun eine weitere Datei auf:
 ![alt text](https://imgur.com/tJ78LDA.png "Eine neue TOKEN_REWARD Datei wird gelistet")
